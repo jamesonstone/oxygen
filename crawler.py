@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import urllib2
+import httplib
 from bs4 import BeautifulSoup
 
 
@@ -8,10 +9,17 @@ def get_links(url):
 	html = connector.read()
 	soup = BeautifulSoup(html)
 	links = soup.find_all('a')
+	
 	for html_tag in links:
 		link = html_tag.get('href', None)
 		if link != None:
 			print link
+
+def get_status(url):
+	conn = httplib.HTTPConnection(url)
+	conn.request("GET", link)
+	resp = conn.getresponse()
+	print r1.status, r1.reason
 
 
 def main():
